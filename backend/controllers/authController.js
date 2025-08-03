@@ -1,3 +1,4 @@
+//authController.js
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const Referral = require('../models/Referral');
@@ -150,9 +151,24 @@ const getProfile = async (req, res) => {
     });
   }
 };
-
+const logout = async (req, res) => {
+  try {
+    // Invalidate the token by not returning it
+    res.json({
+      success: true,
+      message: 'User logged out successfully'
+    });
+  }
+    catch (error) {
+        res.status(400).json({
+        success: false,
+        message: error.message
+        });
+    }
+};
 module.exports = {
   register,
   login,
-  getProfile
+  getProfile,
+  logout
 };
